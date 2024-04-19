@@ -1,51 +1,13 @@
-from flask import Flask
-from flask import jsonify
-from flask import request
+from src import app
+from logging.handlers import RotatingFileHandler
+import logging,os
 
-
-app_name = 'comentarios'
-app = Flask(app_name)
-app.debug = True
-
-comments = {}
-
-
-@app.route('/api/comment/new', methods=['POST'])
-def api_comment_new():
-    request_data = request.get_json()
-
-    email = request_data['email']
-    comment = request_data['comment']
-    content_id = '{}'.format(request_data['content_id'])
-
-    new_comment = {
-            'email': email,
-            'comment': comment,
-            }
-
-    if content_id in comments:
-        comments[content_id].append(new_comment)
-    else:
-        comments[content_id] = [new_comment]
-
-    message = 'comment created and associated with content_id {}'.format(content_id)
-    response = {
-            'status': 'SUCCESS',
-            'message': message,
-            }
-    return jsonify(response)
-
-
-@app.route('/api/comment/list/<content_id>')
-def api_comment_list(content_id):
-    content_id = '{}'.format(content_id)
-
-    if content_id in comments:
-        return jsonify(comments[content_id])
-    else:
-        message = 'content_id {} not found'.format(content_id)
-        response = {
-                'status': 'NOT-FOUND',
-                'message': message,
-                }
-        return jsonify(response), 404
+if __name__ == '__main__':
+    log_format      = f"%(asctime)s [%(levelname)s] %(message)s"
+    log_date_format = "%Y-%m-%d %H:%M:%S"
+    project_path    = os.path.abspath(os.path.dirname(__file__))
+    os.makedirs(project_path+'/log', exist_ok=True)
+    log_file        = project_path+'/log/report.log'
+    handler         = RotatingFileHandler(log_file, maxBytes=1000, backupCount=4)
+    logging.basicConfig(filename=log_file, level=logging.DEBUG, format=log_format, datefmt=log_date_format)
+    app.run(host="localhost", port=8000, debug=True)
