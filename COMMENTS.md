@@ -1,23 +1,23 @@
 **1)** Definição inicial da estrutura do projeto
 
 ```
-├── app                      -- Diretorio Principal do Projeto
+.
+├── app
 │   ├── api.py
+│   ├── compose                -- Diretorio de arquitetura em docker
+│   │   ├── compose-db.yml
+│   │   ├── compose-dev.yml
+│   │   └── table.sql
 │   ├── config.py
-│   ├── log                  -- Diretorio onde conterão os Logs 
-│   ├── requirements.txt     -- Arquivo de Requisitos
-│   ├── settings.toml        -- Arquivo de Configuração do Dynaconf
-│   └── src                  -- Diretorio de Código do Projeto
-│       ├── db.py            -- Classe / Metodo de Conexão com o Banco de Dados
-│       ├── __init__.py      -- Arquivo de Inicialização dos modulos
-│       └── routes.py        -- Classe / Metodo de Rotas do Flask
+│   ├── Dockerfile             
+│   ├── log                    -- Diretorio de logs
+│   ├── requirements.txt
+│   ├── settings.toml          -- Arquivo de configuração
+│   └── src                    -- Diretorio dos modulos
+│       ├── db.py
+│       ├── __init__.py
+│       └── routes.py
 ├── COMMENTS.md
-├── docker                   -- Diretorio para os arquivos Docker
-│   ├── compose-db.yml       
-│   ├── Dockerfile
-│   ├── nginx
-│   │   └── default.conf
-│   └── table.sql
 ├── Makefile
 └── README.md
 ```

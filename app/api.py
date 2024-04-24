@@ -10,4 +10,4 @@ if __name__ == '__main__':
     log_file        = project_path+'/log/report.log'
     handler         = RotatingFileHandler(log_file, maxBytes=1000, backupCount=4)
     logging.basicConfig(filename=log_file, level=logging.DEBUG, format=log_format, datefmt=log_date_format)
-    app.run(host="localhost", port=8000, debug=True)
+    app.run()
