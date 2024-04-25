@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:14
+    hostname: postgres
+    container_name: postgres
+    restart: always
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
+    ports:
+      - '5432:5432'
+    volumes:
+      - ./table.sql:/docker-entrypoint-initdb.d/table.sql
+    networks:
+      - api_network
+
+  api:
+    build: 
+      context: ../
+      dockerfile: Dockerfile
+    image: api
+    container_name: api
+    hostname: api
+    restart: always
+    ports:
+      - '8000:8000'
+    depends_on:
+      - postgres
+    networks:
+      - api_network
+
+networks:
+  api_network:
+    driver: bridge
+    
