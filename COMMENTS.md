@@ -32,11 +32,17 @@ O projeto está estruturado da seguinte forma
 - **pyscopg2** -- biblioteca de conexão com o banco de dados PostgreSQL
 
 **3)** Preparando a api para salvar e consultar os comentários em um banco de dados **POSTGRESL**
+
 **4)** Definindo o projeto para uso em container
+
 **5)** Criando do compose para o banco de dados e o script inicial para criar a tabela
+
 **6)** Criando do compose para ambiente dev para subir tanto como a API e o banco localmente
+
 **7)** Criando a estrutura inicial para o terraform
+
 **8)** Definição da arquitetura do projeto na AWS
+
 **8.1)** Desenho Arquitetura LAMBDA
 
 ![](./images/archteture_labda.png)
